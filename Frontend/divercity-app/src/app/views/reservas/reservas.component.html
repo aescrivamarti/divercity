@@ -1,0 +1,28 @@
+<div class="reservas">
+  <h2>Realizar Reserva</h2>
+
+  <!-- Formulario para hacer una reserva -->
+  <form (ngSubmit)="hacerReserva()">
+    <label for="cliente">Cliente:</label>
+    <select id="cliente" [(ngModel)]="reserva.clienteId" name="clienteId" required>
+      @for (cliente of clientes; track cliente.id) {
+        <option [value]="cliente.id">{{ cliente.nombre }}</option>
+      }
+    </select>
+
+    <label for="fecha">Fecha de la reserva:</label>
+    <input type="date" id="fecha" [(ngModel)]="reserva.fecha" name="fecha" required>
+
+    <button type="submit">Hacer Reserva</button>
+  </form>
+
+  <!-- Listar reservas -->
+  <h3>Reservas Realizadas</h3>
+  <ul>
+    @for (reserva of reservas; track reserva.id) {
+      <li>
+        {{ reserva.clienteNombre }} - {{ reserva.fecha }}
+      </li>
+    }
+  </ul>
+</div>

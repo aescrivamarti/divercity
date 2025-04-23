@@ -1,0 +1,9 @@
+<h2>Listado de Clientes</h2>
+
+<ul>
+  @for (cliente of clientes; track cliente.id) {
+    <li>
+      <strong>{{ cliente.nombre }}</strong> — {{ cliente.email }}
+    </li>
+  }
+</ul>
