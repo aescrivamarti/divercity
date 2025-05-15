@@ -1,38 +1,29 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClienteService } from '../../services/cliente.service';
 import { ReservaService } from '../../services/reserva.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-reservas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './reservas.component.html',
   styleUrls: ['./reservas.component.css']
 })
 export class ReservasComponent {
-  private clienteService = inject(ClienteService);
   private reservaService = inject(ReservaService);
 
-  clientes: any[] = [];
   reservas: any[] = [];
 
   reserva = {
-    clienteId: '',
-    fecha: ''
+    fecha: '',
+    hora: '',
+    numero_personas: 1
   };
 
   constructor() {
-    this.cargarClientes();
     this.cargarReservas();
-  }
-
-  cargarClientes() {
-    this.clienteService.getClientes().subscribe({
-      next: (data) => this.clientes = data,
-      error: (err) => console.error('Error al cargar clientes:', err)
-    });
   }
 
   cargarReservas() {
@@ -43,15 +34,32 @@ export class ReservasComponent {
   }
 
   hacerReserva() {
-    if (!this.reserva.clienteId || !this.reserva.fecha) {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      alert('No se ha podido identificar al usuario. Por favor, vuelve a iniciar sesión.');
+      return;
+    }
+
+    // Validaciones con parseo explícito
+    const numeroPersonas = Number(this.reserva.numero_personas);
+
+    if (!this.reserva.fecha || !this.reserva.hora || !numeroPersonas || numeroPersonas < 1) {
       alert('Todos los campos son obligatorios.');
       return;
     }
 
-    this.reservaService.crearReserva(this.reserva).subscribe({
-      next: (res) => {
+    const nuevaReserva = {
+      fecha: this.reserva.fecha,
+      hora: this.reserva.hora,
+      numero_personas: numeroPersonas,
+      clienteId: Number(userId)
+    };
+
+    this.reservaService.crearReserva(nuevaReserva).subscribe({
+      next: () => {
         alert('Reserva realizada con éxito.');
-        this.reserva = { clienteId: '', fecha: '' };
+        this.reserva = { fecha: '', hora: '', numero_personas: 1 };
         this.cargarReservas();
       },
       error: (err) => {
@@ -60,4 +68,5 @@ export class ReservasComponent {
       }
     });
   }
+
 }

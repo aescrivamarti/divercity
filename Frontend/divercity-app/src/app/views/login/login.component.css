@@ -1,0 +1,47 @@
+/* src/app/views/login/login.component.css */
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light));
+  min-height: 100vh;
+  color: var(--white);
+}
+
+.form-card {
+  background: var(--white);
+  color: var(--blue-dark);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.form-card h2 {
+  margin-bottom: 1.5rem;
+}
+
+.form-card label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.form-card input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: var(--error-red);
+  margin-top: 1rem;
+}
+
+.password{
+  margin-bottom: 20px;
+}

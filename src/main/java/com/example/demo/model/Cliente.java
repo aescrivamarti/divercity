@@ -1,9 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
 
-        import java.util.List;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,14 +16,24 @@ public class Cliente {
     private Long id;
 
     private String nombre;
+    private String apellidos;
 
     @Column(unique = true, nullable = false)
     private String email;
 
     private String telefono;
 
-    private String contraseña;
+    private String password;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Reserva> reservas;
+
+    // Constructor personalizado (sin lista de reservas)
+    public Cliente(String nombre, String apellidos, String email, String telefono, String contraseña) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.telefono = telefono;
+        this.password = contraseña;
+    }
 }

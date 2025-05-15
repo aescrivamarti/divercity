@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+:root {
+  --blue-dark: #003366;
+  --blue: #005599;
+  --blue-light: #00aaff;
+  --white: #ffffff;
+  --error-red: #ff595e;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--blue-dark);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.btn-secondary:hover {
+  background-color: var(--blue-light);
+  color: var(--white);
+}
+
+.btn-back {
+  margin-bottom: 1rem;
+  background-color: var(--blue-dark);
+  color: var(--white);
+}

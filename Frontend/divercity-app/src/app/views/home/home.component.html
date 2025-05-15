@@ -1,13 +1,29 @@
-<div class="home">
-  <h1>Bienvenidos a Divercity</h1>
-  <p>El mejor parque de atracciones para los más pequeños. ¡Ven y disfruta de un día inolvidable!</p>
+<div class="home-container">
+  <img src="assets/LOGO_PNG.png" alt="Logo Divercity" class="logo" />
+  <h1>Bienvenido, {{ authService.getName() || 'Invitado' }}</h1>
 
-  <!-- Aquí puedes agregar un enlace para navegar a otras páginas -->
-  <nav>
-    <ul>
-      <li><a [routerLink]="'/clientes'">Gestionar Clientes</a></li>
-      <li><a [routerLink]="'/reservas'">Hacer una Reserva</a></li>
-      <li><a [routerLink]="'/atracciones'">Ver Atracciones</a></li>
-    </ul>
+  <nav class="menu">
+    <!-- Siempre disponible -->
+    <a routerLink="/atracciones" class="menu-button">Ver atracciones</a>
+
+    <!-- Si NO está logueado -->
+    @if (!authService.isLoggedIn()) {
+      <a routerLink="/login" class="menu-button">Iniciar sesión</a>
+      <a routerLink="/registro" class="menu-button">Registrarse</a>
+    } @else {
+      <!-- SI es USER -->
+      @if (authService.getRole() === 'USER') {
+        <a routerLink="/reservas" class="menu-button">Hacer una reserva</a>
+        <a routerLink="/gestionar-reserva" class="menu-button">Gestionar reserva</a>
+      }
+      <!-- SI es ADMIN -->
+      @if (authService.getRole() === 'ADMIN') {
+        <a routerLink="/clientes" class="menu-button">Gestionar clientes</a>
+        <a routerLink="/reservas" class="menu-button">Hacer una reserva</a>
+        <a routerLink="/gestionar-reserva" class="menu-button">Gestionar reserva</a>
+      }
+      <!-- Botón de logout -->
+      <button (click)="logout()" class="menu-button logout">Cerrar sesión</button>
+    }
   </nav>
 </div>

@@ -1,1 +1,78 @@
-<p>atracciones works!</p>
+<!-- src/app/views/atracciones/atracciones.component.html -->
+<div class="page-container">
+  <a routerLink="/" class="btn btn-back">← Volver al inicio</a>
+
+  <h2 class="section-title">Nuestras atracciones</h2>
+
+  <!-- Galería de Cards -->
+  <div class="row gallery">
+    @for (atr of atracciones; track atr.id) {
+      <div id="cards" class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card attraction-card h-100">
+          <img
+            src="assets/atracciones/{{ atr.image || 'placeholder.jpg' }}"
+            class="card-img-top"
+            alt="{{ atr.nombre }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ atr.nombre }}</h5>
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#info' + atr.id"
+              aria-expanded="false"
+              [attr.aria-controls]="'info' + atr.id"
+            >
+              Ver Info
+            </button>
+            <div class="collapse mt-2" [id]="'info' + atr.id">
+              <p class="card-text">{{ atr.descripcion }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+
+  <!-- Carrusel de Imágenes -->
+  <div
+    id="parkCarousel"
+    class="carousel slide mt-5"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      @for (img of carouselImages; track img) {
+        <div
+          class="carousel-item"
+          [class.active]="img === carouselImages[0]"
+        >
+          <img
+            src="assets/carousel/{{ img }}"
+            class="d-block w-100"
+            alt="Slide"
+          />
+        </div>
+      }
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#parkCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#parkCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</div>

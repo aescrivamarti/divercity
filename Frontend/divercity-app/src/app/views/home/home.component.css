@@ -1,13 +1,47 @@
-.home {
+.home-container {
   text-align: center;
-  padding: 20px;
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #005599, #00aaff);
+  color: white;
+  min-height: 100vh;
 }
 
-nav ul {
-  list-style-type: none;
-  padding: 0;
+.logo {
+  width: 250px;
+  margin-bottom: 10px;
 }
 
-nav li {
-  margin: 10px;
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.menu-button {
+  background-color: white;
+  color: #005599;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  width: 250px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.menu-button:hover {
+  background-color: #003366;
+  color: white;
 }

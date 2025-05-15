@@ -1,28 +1,45 @@
-<div class="reservas">
-  <h2>Realizar Reserva</h2>
+<div class="page-container">
+  <a routerLink="/" class="btn btn-back">← Volver al inicio</a>
 
-  <!-- Formulario para hacer una reserva -->
-  <form (ngSubmit)="hacerReserva()">
-    <label for="cliente">Cliente:</label>
-    <select id="cliente" [(ngModel)]="reserva.clienteId" name="clienteId" required>
-      @for (cliente of clientes; track cliente.id) {
-        <option [value]="cliente.id">{{ cliente.nombre }}</option>
-      }
-    </select>
+  <div class="form-card">
+    <h2>Hacer una reserva</h2>
 
-    <label for="fecha">Fecha de la reserva:</label>
-    <input type="date" id="fecha" [(ngModel)]="reserva.fecha" name="fecha" required>
+    <form (ngSubmit)="hacerReserva()" #reservaForm="ngForm">
+      <label for="fecha">Fecha</label>
+      <input
+        type="date"
+        id="fecha"
+        [(ngModel)]="reserva.fecha"
+        name="fecha"
+        required
+      />
 
-    <button type="submit">Hacer Reserva</button>
-  </form>
+      <label for="hora">Hora</label>
+      <input
+        type="time"
+        id="hora"
+        [(ngModel)]="reserva.hora"
+        name="hora"
+        required
+      />
 
-  <!-- Listar reservas -->
-  <h3>Reservas Realizadas</h3>
-  <ul>
-    @for (reserva of reservas; track reserva.id) {
-      <li>
-        {{ reserva.clienteNombre }} - {{ reserva.fecha }}
-      </li>
-    }
-  </ul>
+      <label for="numero_personas">Número de personas</label>
+      <input
+        type="number"
+        id="numero_personas"
+        [(ngModel)]="reserva.numero_personas"
+        name="numero_personas"
+        required
+        min="1"
+      />
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="reservaForm.invalid"
+      >
+        Reservar
+      </button>
+    </form>
+  </div>
 </div>

@@ -2,6 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Reserva {
+  id?: number;                  // Se genera automáticamente
+  fecha: string;
+  hora: string;
+  numero_personas: number;
+  clienteId: number | string;  // Viene del localStorage (como string)
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,13 +18,17 @@ export class ReservaService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todas las reservas
-  getReservas(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // Obtener todas las reservas (con credenciales)
+  getReservas(): Observable<Reserva[]> {
+    return this.http.get<Reserva[]>(this.apiUrl, {
+      withCredentials: true
+    });
   }
 
-  // Crear nueva reserva
-  crearReserva(reserva: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, reserva);
+  // Crear nueva reserva (con credenciales)
+  crearReserva(reserva: Reserva): Observable<Reserva> {
+    return this.http.post<Reserva>(this.apiUrl, reserva, {
+      withCredentials: true
+    });
   }
 }

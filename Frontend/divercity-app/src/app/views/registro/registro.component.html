@@ -1,1 +1,69 @@
-<p>registro works!</p>
+<!-- src/app/views/registro/registro.component.html -->
+<div class="page-container">
+  <a routerLink="/" class="btn btn-back">← Volver al inicio</a>
+
+  <div class="form-card">
+    <h2>Registro de usuario</h2>
+
+    <form (ngSubmit)="registrarUsuario()" #registroForm="ngForm">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        id="nombre"
+        [(ngModel)]="usuario.nombre"
+        name="nombre"
+        required
+      />
+
+      <label for="apellidos">Apellidos</label>
+      <input
+        type="text"
+        id="apellidos"
+        [(ngModel)]="usuario.apellidos"
+        name="apellidos"
+        required
+      />
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="usuario.email"
+        name="email"
+        required
+      />
+
+      <label for="telefono">Teléfono</label>
+      <input
+        type="text"
+        id="telefono"
+        [(ngModel)]="usuario.telefono"
+        name="telefono"
+        required
+      />
+
+      <label for="contrasena">Contraseña</label>
+      <input
+        class="password"
+        type="password"
+        id="contrasena"
+        [(ngModel)]="usuario.password"
+        name="contrasena"
+        required
+      />
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="registroForm.invalid"
+      >
+        Registrar
+      </button>
+    </form>
+
+    @if (registroError) {
+      <p class="error">{{ registroError }}</p>
+    }
+
+  </div>
+</div>
